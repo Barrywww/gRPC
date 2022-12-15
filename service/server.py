@@ -43,14 +43,13 @@ class InventoryService(service_pb2_grpc.InventoryServicer):
     # get a book by isbn
     def GetBook(self, request, context):
         filtered_book = list(filter(lambda book: book["isbn"] == request.isbn, books))
+        # if there is one book with the given isbn
         if len(filtered_book) > 0:
             # flatten the book object
             grpc_book = inventory_pb2.Book(**filtered_book[0])
             return service_pb2.GetBookResponse(book=grpc_book)
 
-        # set the error code and message
-        context.set_code(grpc.StatusCode.NOT_FOUND)
-        context.set_details("Book not found in the database.")
+        # otherwise, return empty response
         return service_pb2.GetBookResponse()
 
     # create a new book in the database by user input
@@ -75,8 +74,6 @@ class InventoryService(service_pb2_grpc.InventoryServicer):
             return service_pb2.Status(code=0, message="Book created successfully.")
 
         # set the error code and message
-        context.set_code(grpc.StatusCode.ALREADY_EXISTS)
-        context.set_details("Book with the same ISBN already exists in the database.")
         return service_pb2.Status(code=6, message="Book with the same ISBN already exists in the database.")
 
 
