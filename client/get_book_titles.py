@@ -15,6 +15,7 @@ def GetBooksByISBNList(client, lst):
 
 if __name__ == "__main__":
     isbn_list = ["9783161484100", "9783161484101"]
+    # establish client instance
     client = InventoryClient(host="127.0.0.1", port=50051)
     print("Client created successfully!")
     print(GetBooksByISBNList(client, isbn_list))
