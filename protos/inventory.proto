@@ -1,5 +1,5 @@
 // schema definition for the messages used in the inventory system
-syntax = "proto2";
+syntax = "proto3";
 
 package barry.grpc;
 
@@ -7,16 +7,15 @@ message Book {
   optional string isbn = 1;
   optional string title = 2;
   optional string author = 3;
+  optional Genre genre = 4;
   optional int32 year = 5;
 
   enum Genre {
-    FANTASY = 1;
-    ADVENTURE = 2;
-    ROMANCE = 3;
-    CONTEMPORARY = 4;
+    FANTASY = 0;
+    ADVENTURE = 1;
+    ROMANCE = 2;
+    CONTEMPORARY = 3;
   }
-
-  optional Genre genre = 4;
 }
 
 message InventoryItem {
@@ -26,7 +25,7 @@ message InventoryItem {
   }
 
   enum InventoryStatus {
-    AVAILABLE = 1;
-    TAKEN = 2;
+    AVAILABLE = 0;
+    TAKEN = 1;
   }
 }

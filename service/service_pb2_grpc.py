@@ -23,7 +23,7 @@ class InventoryStub(object):
         self.CreateBook = channel.unary_unary(
                 '/barry.grpc.Inventory/CreateBook',
                 request_serializer=service__pb2.CreateBookRequest.SerializeToString,
-                response_deserializer=service__pb2.CreateBookResponse.FromString,
+                response_deserializer=service__pb2.Status.FromString,
                 )
 
 
@@ -54,7 +54,7 @@ def add_InventoryServicer_to_server(servicer, server):
             'CreateBook': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateBook,
                     request_deserializer=service__pb2.CreateBookRequest.FromString,
-                    response_serializer=service__pb2.CreateBookResponse.SerializeToString,
+                    response_serializer=service__pb2.Status.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -97,6 +97,6 @@ class Inventory(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/barry.grpc.Inventory/CreateBook',
             service__pb2.CreateBookRequest.SerializeToString,
-            service__pb2.CreateBookResponse.FromString,
+            service__pb2.Status.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

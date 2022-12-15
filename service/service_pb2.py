@@ -12,23 +12,24 @@ _sym_db = _symbol_database.Default()
 
 
 import inventory_pb2 as inventory__pb2
+from google.protobuf import any_pb2 as google_dot_protobuf_dot_any__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rservice.proto\x12\nbarry.grpc\x1a\x0finventory.proto\"\x1e\n\x0eGetBookRequest\x12\x0c\n\x04isbn\x18\x01 \x01(\t\"1\n\x0fGetBookResponse\x12\x1e\n\x04\x62ook\x18\x01 \x01(\x0b\x32\x10.barry.grpc.Book\"u\n\x11\x43reateBookRequest\x12\x0c\n\x04isbn\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\x0e\n\x06\x61uthor\x18\x03 \x01(\t\x12%\n\x05genre\x18\x04 \x01(\x0e\x32\x16.barry.grpc.Book.Genre\x12\x0c\n\x04year\x18\x05 \x01(\x05\";\n\x12\x43reateBookResponse\x12%\n\x0b\x62ookCreated\x18\x01 \x01(\x0b\x32\x10.barry.grpc.Book2\xa0\x01\n\tInventory\x12\x44\n\x07GetBook\x12\x1a.barry.grpc.GetBookRequest\x1a\x1b.barry.grpc.GetBookResponse\"\x00\x12M\n\nCreateBook\x12\x1d.barry.grpc.CreateBookRequest\x1a\x1e.barry.grpc.CreateBookResponse\"\x00')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rservice.proto\x12\nbarry.grpc\x1a\x0finventory.proto\x1a\x19google/protobuf/any.proto\",\n\x0eGetBookRequest\x12\x11\n\x04isbn\x18\x01 \x01(\tH\x00\x88\x01\x01\x42\x07\n\x05_isbn\"?\n\x0fGetBookResponse\x12#\n\x04\x62ook\x18\x01 \x01(\x0b\x32\x10.barry.grpc.BookH\x00\x88\x01\x01\x42\x07\n\x05_book\"\xbf\x01\n\x11\x43reateBookRequest\x12\x11\n\x04isbn\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x12\n\x05title\x18\x02 \x01(\tH\x01\x88\x01\x01\x12\x13\n\x06\x61uthor\x18\x03 \x01(\tH\x02\x88\x01\x01\x12*\n\x05genre\x18\x04 \x01(\x0e\x32\x16.barry.grpc.Book.GenreH\x03\x88\x01\x01\x12\x11\n\x04year\x18\x05 \x01(\x05H\x04\x88\x01\x01\x42\x07\n\x05_isbnB\x08\n\x06_titleB\t\n\x07_authorB\x08\n\x06_genreB\x07\n\x05_year\"m\n\x06Status\x12\x11\n\x04\x63ode\x18\x01 \x01(\x05H\x00\x88\x01\x01\x12\x14\n\x07message\x18\x02 \x01(\tH\x01\x88\x01\x01\x12%\n\x07\x64\x65tails\x18\x03 \x03(\x0b\x32\x14.google.protobuf.AnyB\x07\n\x05_codeB\n\n\x08_message2\x94\x01\n\tInventory\x12\x44\n\x07GetBook\x12\x1a.barry.grpc.GetBookRequest\x1a\x1b.barry.grpc.GetBookResponse\"\x00\x12\x41\n\nCreateBook\x12\x1d.barry.grpc.CreateBookRequest\x1a\x12.barry.grpc.Status\"\x00\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'service_pb2', globals())
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _GETBOOKREQUEST._serialized_start=46
-  _GETBOOKREQUEST._serialized_end=76
-  _GETBOOKRESPONSE._serialized_start=78
-  _GETBOOKRESPONSE._serialized_end=127
-  _CREATEBOOKREQUEST._serialized_start=129
-  _CREATEBOOKREQUEST._serialized_end=246
-  _CREATEBOOKRESPONSE._serialized_start=248
-  _CREATEBOOKRESPONSE._serialized_end=307
-  _INVENTORY._serialized_start=310
-  _INVENTORY._serialized_end=470
+  _GETBOOKREQUEST._serialized_start=73
+  _GETBOOKREQUEST._serialized_end=117
+  _GETBOOKRESPONSE._serialized_start=119
+  _GETBOOKRESPONSE._serialized_end=182
+  _CREATEBOOKREQUEST._serialized_start=185
+  _CREATEBOOKREQUEST._serialized_end=376
+  _STATUS._serialized_start=378
+  _STATUS._serialized_end=487
+  _INVENTORY._serialized_start=490
+  _INVENTORY._serialized_end=638
 # @@protoc_insertion_point(module_scope)

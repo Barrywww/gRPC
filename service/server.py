@@ -58,6 +58,12 @@ class InventoryService(service_pb2_grpc.InventoryServicer):
         filtered_books = list(filter(lambda book: book["isbn"] == request.isbn, books))
         # if the book does not exist
         if len(filtered_books) == 0:
+            # verify the user input
+            if not (request.isbn and request.title and request.author and request.genre):
+                context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
+                context.set_details("Invalid request.")
+                return service_pb2.Status(code=3, message="Invalid request.")
+
             db_book = {
                 "isbn": request.isbn,
                 "title": request.title,
@@ -66,15 +72,12 @@ class InventoryService(service_pb2_grpc.InventoryServicer):
                 "genre": request.genre
             }
             books.append(db_book)
-
-            # flatten the book object
-            grpc_book = inventory_pb2.Book(**db_book)
-            return service_pb2.CreateBookResponse(bookCreated=grpc_book)
+            return service_pb2.Status(code=0, message="Book created successfully.")
 
         # set the error code and message
         context.set_code(grpc.StatusCode.ALREADY_EXISTS)
         context.set_details("Book with the same ISBN already exists in the database.")
-        return service_pb2.CreateBookResponse()
+        return service_pb2.Status(code=6, message="Book with the same ISBN already exists in the database.")
 
 
 # Start the server

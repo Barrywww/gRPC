@@ -1,13 +1,14 @@
-syntax = "proto2";
+syntax = "proto3";
 
 package barry.grpc;
 
 import "inventory.proto";
+import "google/protobuf/any.proto";
 
 // Definition of the inventory service
 service Inventory {
   rpc GetBook(GetBookRequest) returns (GetBookResponse) {}
-  rpc CreateBook(CreateBookRequest) returns (CreateBookResponse) {}
+  rpc CreateBook(CreateBookRequest) returns (Status) {}
 }
 
 message GetBookRequest {
@@ -29,7 +30,8 @@ message CreateBookRequest {
   optional int32 year = 5;
 }
 
-message CreateBookResponse {
-  // response schema after a book is created
-  optional Book bookCreated = 1;
+message Status {
+  optional int32 code = 1;
+  optional string message = 2;
+  repeated google.protobuf.Any details = 3;
 }
