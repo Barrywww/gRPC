@@ -59,8 +59,6 @@ class InventoryService(service_pb2_grpc.InventoryServicer):
         if len(filtered_books) == 0:
             # verify the user input
             if not (request.isbn and request.title and request.author and request.genre):
-                context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
-                context.set_details("Invalid request.")
                 return service_pb2.Status(code=3, message="Invalid request.")
 
             db_book = {
