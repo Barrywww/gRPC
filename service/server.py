@@ -1,10 +1,15 @@
+import sys
+import os
+
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+
 from concurrent import futures
 import logging
 
 import grpc
-import inventory_pb2
-import service_pb2
-import service_pb2_grpc
+from service import inventory_pb2
+from service import service_pb2
+from service import service_pb2_grpc
 
 # book storage
 books = [
@@ -82,15 +87,19 @@ class InventoryService(service_pb2_grpc.InventoryServicer):
 
 # Start the server
 # Adapted from https://github.com/grpc/grpc/blob/master/examples/python/helloworld/greeter_server.py
-def serve():
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    service_pb2_grpc.add_InventoryServicer_to_server(InventoryService(), server)
-    server.add_insecure_port('[::]:50051')
-    server.start()
-    print("Server started successfully!")
-    server.wait_for_termination()
+class InventoryServer:
+    def __init__(self):
+        self.server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+        service_pb2_grpc.add_InventoryServicer_to_server(InventoryService(), self.server)
+        self.server.add_insecure_port('[::]:50051')
+        self.server.start()
+        print("Server started successfully!")
+        self.server.wait_for_termination()
+
+    def close(self):
+        self.server.stop(0)
 
 
 if __name__ == '__main__':
     logging.basicConfig()
-    serve()
+    InventoryServer()
