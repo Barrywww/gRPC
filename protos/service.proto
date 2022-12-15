@@ -1,0 +1,35 @@
+syntax = "proto2";
+
+package barry.grpc;
+
+import "inventory.proto";
+
+// Definition of the inventory service
+service Inventory {
+  rpc GetBook(GetBookRequest) returns (GetBookResponse) {}
+  rpc CreateBook(CreateBookRequest) returns (CreateBookResponse) {}
+}
+
+message GetBookRequest {
+  // get book by isbn
+  optional string isbn = 1;
+}
+
+message GetBookResponse {
+  // response for getting a book
+  optional Book book = 1;
+}
+
+message CreateBookRequest {
+  // request schema for creating a book
+  optional string isbn = 1;
+  optional string title = 2;
+  optional string author = 3;
+  optional Book.Genre genre = 4;
+  optional int32 year = 5;
+}
+
+message CreateBookResponse {
+  // response schema after a book is created
+  optional Book bookCreated = 1;
+}

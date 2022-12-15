@@ -1,0 +1,32 @@
+// schema definition for the messages used in the inventory system
+syntax = "proto2";
+
+package barry.grpc;
+
+message Book {
+  optional string isbn = 1;
+  optional string title = 2;
+  optional string author = 3;
+  optional int32 year = 5;
+
+  enum Genre {
+    FANTASY = 1;
+    ADVENTURE = 2;
+    ROMANCE = 3;
+    CONTEMPORARY = 4;
+  }
+
+  optional Genre genre = 4;
+}
+
+message InventoryItem {
+  optional string inventoryId = 1;
+  oneof bookOneOf {
+    Book book = 2;
+  }
+
+  enum InventoryStatus {
+    AVAILABLE = 1;
+    TAKEN = 2;
+  }
+}
